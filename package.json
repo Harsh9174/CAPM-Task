@@ -1,0 +1,34 @@
+{
+  "name": "OMS",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@cap-js/hana": "^1",
+    "@sap/cds": "^8",
+    "@sap/xssec": "^4",
+    "deploy": "^1.0.3",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/cds-types": "^0.9.0",
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^8",
+    "@sap/hdi-deploy": "^5.4.1",
+    "hdb": "^0.19.12"
+  },
+  "scripts": {
+    "start": "cds-serve"
+  },
+  "cds": {
+    "requires": {
+      "auth": "mocked",
+      "db": "hana"
+    },
+    "sql": {
+      "native_hana_associations": false
+    }
+  }
+}
