@@ -1,44 +1,92 @@
+
+# GET  http://localhost:4004/odata/v4/my/Products
+
+# POST http://localhost:4004/odata/v4/my/product_create
+# Content-Type: application/json
+
+# {
+#   "P_NAME": "Laptop",
+#   "P_CATEGORY": "Electronics",
+#   "P_PRICE": 1200,
+#   "P_STOCK": 10
+# }
+
+# DELETE http://localhost:4004/odata/v4/my/Products(54) 
+
+# POST http://localhost:4004/odata/v4/my/OrderItems
+# Content-Type: application/json
+# {
+#     "OrderID": 2,
+#     "ProductID": 3,
+#     "Quantity": 1,
+#     "subtotal": 130.00
+# }
+
+
+
+# POST http://localhost:4004/odata/v4/my/product_create
+# Content-Type: application/json
+
+# {
+#     "P_NAME": "Lenovo",
+#     "P_CATEGORY": "Toy",
+#     "P_PRICE": 1000,
+#     "P_STOCK": 10
+# }
+
+
+
+# POST http://localhost:4004/odata/v4/my/Customer_create
+# Content-Type: application/json
+
+# {
+#     "P_NAME": "Harsh Agrawal",
+#     "P_EMAIL": "harsh.agrawal9010@gmail.com",
+#     "P_PHONE": "7000095487",
+#     "P_ADDRESS": "Korba chhattisgarh",
+#     "P_COUNTRY" : "India"
+# }
+
 # POST http://localhost:4004/odata/v4/my/Orders
 # Content-Type: application/json
 
 # {
-#   "OrderID": 1005,
-#   "CustomerID": 1,
-#   "OrderDate": "2025-03-06T12:00:00Z"
+#     "OrderID": 10000,
+#     "CustomerID": 1,
+#     "OrderDate": "2025-03-07T12:00:00Z",
+#     "TotalAmount": 500.00,
+#     "items": [
+#         { "OrderItemID": 10000, "ProductID": 20000, "Quantity": 2, "subtotal": 100.00 },
+#         { "OrderItemID": 10001, "ProductID": 21000, "Quantity": 3, "subtotal": 150.00 }
+#     ]
 # }
+
+# DELETE http://localhost:4004/odata/v4/my/Orders(10000)
+
+
+
+
+# POST http://localhost:4004/odata/v4/my/Orders
+# Content-Type: application/json
+
+# {
+#     "OrderID": 10000,
+#     "CustomerID": 1,
+#     "OrderDate": "2025-03-07T12:00:00Z"
+# }
+
 
 
 # POST http://localhost:4004/odata/v4/my/OrderItems
 # Content-Type: application/json
 
-# [
-#   {
-#     "OrderItemID": 1000,
-#     "OrderID": 1001,
-#     "ProductID": 101,
-#     "Quantity": 2,
-#     "subtotal": 50.00
-#   }
-# # ]
-# POST http://localhost:4004/odata/v4/my/OrderItems
-# Content-Type: application/json
-
 # {
-#   "OrderItemID": 1013,
-#   "OrderID": 1005,
-#   "ProductID": 1,
-#   "Quantity": 5,
-#   "subtotal": 50.00
+#     "OrderItemID": 702,
+#     "OrderID": 10000,
+#     "ProductID": 2,
+#     "Quantity": 2
 # }
-# POST http://localhost:4004/odata/v4/my/Order?expand=OrderItems
-# Content-Type: application/json
 
-# {
-#   "OrderItemID": 1013,
-#   "OrderID": 1005,
-#   "ProductID": 1,
-#   "Quantity": 5,
-#   "subtotal": 50.00
-# }
-GET  http://localhost:4004/odata/v4/my/Products
 
+# GET  http://localhost:4004/odata/v4/my/OrderItems(700)
+# GET  http://localhost:4004/odata/v4/my/Orders(10000)

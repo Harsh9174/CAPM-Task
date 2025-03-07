@@ -8,6 +8,7 @@
   "dependencies": {
     "@cap-js/hana": "^1.6.1",
     "@sap/cds": "^8",
+    "@sap/hana-client": "^2.23.27",
     "@sap/xssec": "^4",
     "deploy": "^1.0.3",
     "express": "^4"
@@ -26,6 +27,11 @@
     "requires": {
       "auth": "basic",
       "db": "hana"
+    },
+    "service": {
+      "admin": {
+        "file": "../srv/Product_creation.js"
+      }
     },
     "sql": {
       "native_hana_associations": false
