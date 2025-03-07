@@ -65,7 +65,9 @@
     <rankingFilter type="DENSE_RANK" offsetReference="FRONT" dynamicPartitionAttributes="false">
       <partitionViewAttributeName id="COUNTRY"/>
       <order byViewAttributeName="TOTALAMOUNT" direction="DESC"/>
-      <rankThreshold/>
+      <rankThreshold>
+        <value>3</value>
+      </rankThreshold>
       <rankViewAttributeName>Rank_Column</rankViewAttributeName>
     </rankingFilter>
   </calculationView>

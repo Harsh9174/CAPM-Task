@@ -1,0 +1,44 @@
+# POST http://localhost:4004/odata/v4/my/Orders
+# Content-Type: application/json
+
+# {
+#   "OrderID": 1005,
+#   "CustomerID": 1,
+#   "OrderDate": "2025-03-06T12:00:00Z"
+# }
+
+
+# POST http://localhost:4004/odata/v4/my/OrderItems
+# Content-Type: application/json
+
+# [
+#   {
+#     "OrderItemID": 1000,
+#     "OrderID": 1001,
+#     "ProductID": 101,
+#     "Quantity": 2,
+#     "subtotal": 50.00
+#   }
+# # ]
+# POST http://localhost:4004/odata/v4/my/OrderItems
+# Content-Type: application/json
+
+# {
+#   "OrderItemID": 1013,
+#   "OrderID": 1005,
+#   "ProductID": 1,
+#   "Quantity": 5,
+#   "subtotal": 50.00
+# }
+# POST http://localhost:4004/odata/v4/my/Order?expand=OrderItems
+# Content-Type: application/json
+
+# {
+#   "OrderItemID": 1013,
+#   "OrderID": 1005,
+#   "ProductID": 1,
+#   "Quantity": 5,
+#   "subtotal": 50.00
+# }
+GET  http://localhost:4004/odata/v4/my/Products
+

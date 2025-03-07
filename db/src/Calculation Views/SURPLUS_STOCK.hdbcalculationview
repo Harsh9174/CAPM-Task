@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Calculation:scenario xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Calculation="http://www.sap.com/ndb/BiModelCalculation.ecore" id="SURPLUS_STOCK" applyPrivilegeType="NONE" dataCategory="CUBE" schemaVersion="3.0" hierarchyGeneration="SQL" outputViewType="Aggregation" application="BAS" cacheInvalidationPeriod="NONE" enforceSqlExecution="true">
+<descriptions defaultDescription="SURPLUS_STOCK"/>
+<localVariables/>
+<variableMappings/>
+<dataSources>
+  <DataSource id="PRODUCTS">
+    <resourceUri>PRODUCTS</resourceUri>
+  </DataSource>
+  <DataSource id="ORDERITEMS">
+    <resourceUri>ORDERITEMS</resourceUri>
+  </DataSource>
+</dataSources>
+<snapshotProcedures/>
+<calculationViews>
+  <calculationView xsi:type="Calculation:ProjectionView" id="Projection_1">
+    <viewAttributes>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CATEGORY"/>
+      <viewAttribute id="PRICE"/>
+      <viewAttribute id="STOCK"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <input node="PRODUCTS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:AggregationView" id="Aggregation_1">
+    <viewAttributes>
+      <viewAttribute id="PRODUCTID"/>
+      <viewAttribute id="QUANTITY" aggregationType="sum"/>
+    </viewAttributes>
+    <calculatedViewAttributes/>
+    <restrictedViewAttributes/>
+    <input node="ORDERITEMS"/>
+  </calculationView>
+  <calculationView xsi:type="Calculation:JoinView" id="Join_1" cardinality="CN_N" joinType="leftOuter">
+    <viewAttributes>
+      <viewAttribute id="PRODUCTID" aggregationType="sum"/>
+      <viewAttribute id="NAME"/>
+      <viewAttribute id="CATEGORY"/>
+      <viewAttribute id="PRICE" aggregationType="sum"/>
+      <viewAttribute id="QUANTITY_SOLD" aggregationType="sum"/>
+      <viewAttribute id="STOCK" aggregationType="sum"/>
+      <viewAttribute hidden="true" id="JOIN$PRODUCTID$PRODUCTID"/>
+    </viewAttributes>
+    <calculatedViewAttributes>
+      <calculatedViewAttribute id="Stock_Remaining" datatype="INTEGER" expressionLanguage="SQL">
+        <formula>&quot;STOCK&quot; -&quot;QUANTITY_SOLD&quot;</formula>
+      </calculatedViewAttribute>
+      <calculatedViewAttribute id="FLAG" datatype="NVARCHAR" length="13" expressionLanguage="SQL">
+        <formula>CASE 
+    WHEN &quot;Stock_Remaining&quot; &gt; 0 THEN 'Surplus' 
+    ELSE 'Need Stock' 
+END</formula>
+      </calculatedViewAttribute>
+    </calculatedViewAttributes>
+    <input node="Projection_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRODUCTID" source="PRODUCTID"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="NAME" source="NAME"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="CATEGORY" source="CATEGORY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="PRICE" source="PRICE"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="STOCK" source="STOCK"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCTID$PRODUCTID" source="PRODUCTID"/>
+    </input>
+    <input node="Aggregation_1">
+      <mapping xsi:type="Calculation:AttributeMapping" target="QUANTITY_SOLD" source="QUANTITY"/>
+      <mapping xsi:type="Calculation:AttributeMapping" target="JOIN$PRODUCTID$PRODUCTID" source="PRODUCTID"/>
+    </input>
+    <joinAttribute name="JOIN$PRODUCTID$PRODUCTID"/>
+  </calculationView>
+</calculationViews>
+<logicalModel id="Join_1">
+  <attributes>
+    <attribute id="PRODUCTID" order="1" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="PRODUCTID"/>
+      <keyMapping columnObjectName="Join_1" columnName="PRODUCTID"/>
+    </attribute>
+    <attribute id="NAME" order="2" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="NAME"/>
+      <keyMapping columnObjectName="Join_1" columnName="NAME"/>
+    </attribute>
+    <attribute id="CATEGORY" order="3" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="CATEGORY"/>
+      <keyMapping columnObjectName="Join_1" columnName="CATEGORY"/>
+    </attribute>
+    <attribute id="FLAG" order="8" displayAttribute="false" attributeHierarchyActive="false">
+      <descriptions defaultDescription="FLAG"/>
+      <keyMapping columnObjectName="Join_1" columnName="FLAG"/>
+    </attribute>
+  </attributes>
+  <calculatedAttributes/>
+  <baseMeasures>
+    <measure id="PRICE" order="4" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="PRICE"/>
+      <measureMapping columnObjectName="Join_1" columnName="PRICE"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="QUANTITY" order="5" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="QUANTITY"/>
+      <measureMapping columnObjectName="Join_1" columnName="QUANTITY_SOLD"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="STOCK" order="6" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="STOCK"/>
+      <measureMapping columnObjectName="Join_1" columnName="STOCK"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+    <measure id="STOCK_REM" order="7" aggregationType="sum" measureType="simple">
+      <descriptions defaultDescription="Stock_Remaining"/>
+      <measureMapping columnObjectName="Join_1" columnName="Stock_Remaining"/>
+      <exceptionAggregationMetadata/>
+    </measure>
+  </baseMeasures>
+  <calculatedMeasures/>
+  <restrictedMeasures/>
+  <localDimensions/>
+</logicalModel>
+<layout>
+  <shapes>
+    <shape expanded="true" modelObjectName="Output" modelObjectNameSpace="MeasureGroup">
+      <upperLeftCorner x="221.11302679000914" y="112"/>
+    
+      <rectangleSize width="160"/>
+    </shape>
+  
+    <shape expanded="true" modelObjectName="Projection_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="92.00000000000001" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Aggregation_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="302.00000000000006" y="376.9999988079071"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape expanded="true" modelObjectName="Join_1" modelObjectNameSpace="CalculationView">
+      <upperLeftCorner x="221.11302679000914" y="217"/>
+      <rectangleSize height="30" width="160"/>
+    </shape>
+    <shape modelObjectName="Projection_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="20" y="30"/>
+      <rectangleSize width="136.0234375"/>
+    </shape>
+    <shape modelObjectName="Aggregation_1" modelObjectNameSpace="Join_1" modelObjectType="JoinNodeInput">
+      <upperLeftCorner x="320" y="30"/>
+      <rectangleSize width="151.3876953125"/>
+    </shape>
+  </shapes>
+</layout>
+</Calculation:scenario>

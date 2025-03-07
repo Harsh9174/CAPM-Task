@@ -38,5 +38,8 @@ resources:
   - name: OMS-db
     type: com.sap.xs.hdi-container
     parameters:
+      config:
+      schena : OMS_HDI_OMS_DB_DEPLOYER_1
+      makeUniqueName: false
       service: hana
       service-plan: hdi-shared
