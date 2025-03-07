@@ -1,0 +1,1 @@
+To execute js files rename js files with the exact service file(.cds) file name for eg if .cds is service.cds then js will be service.js
