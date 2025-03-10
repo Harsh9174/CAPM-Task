@@ -1,15 +1,7 @@
 
 # GET  http://localhost:4004/odata/v4/my/Products
 
-# POST http://localhost:4004/odata/v4/my/product_create
-# Content-Type: application/json
 
-# {
-#   "P_NAME": "Laptop",
-#   "P_CATEGORY": "Electronics",
-#   "P_PRICE": 1200,
-#   "P_STOCK": 10
-# }
 
 # DELETE http://localhost:4004/odata/v4/my/Products(54) 
 
@@ -28,7 +20,7 @@
 # Content-Type: application/json
 
 # {
-#     "P_NAME": "Lenovo",
+#     "P_NAME": "Jeep",
 #     "P_CATEGORY": "Toy",
 #     "P_PRICE": 1000,
 #     "P_STOCK": 10
@@ -40,10 +32,10 @@
 # Content-Type: application/json
 
 # {
-#     "P_NAME": "Harsh Agrawal",
-#     "P_EMAIL": "harsh.agrawal9010@gmail.com",
-#     "P_PHONE": "7000095487",
-#     "P_ADDRESS": "Korba chhattisgarh",
+#     "P_NAME": "Ankit Raghuvanshi",
+#     "P_EMAIL": "Ankit.Raghuvanshi@gmail.com",
+#     "P_PHONE": "9173832332",
+#     "P_ADDRESS": "Bhopal",
 #     "P_COUNTRY" : "India"
 # }
 
@@ -54,14 +46,32 @@
 #     "OrderID": 10000,
 #     "CustomerID": 1,
 #     "OrderDate": "2025-03-07T12:00:00Z",
-#     "TotalAmount": 500.00,
 #     "items": [
-#         { "OrderItemID": 10000, "ProductID": 20000, "Quantity": 2, "subtotal": 100.00 },
-#         { "OrderItemID": 10001, "ProductID": 21000, "Quantity": 3, "subtotal": 150.00 }
+#         { "OrderItemID": 10000, "ProductID": 20000, "Quantity": 2 },
+#         { "OrderItemID": 10001, "ProductID": 21000, "Quantity": 3 }
 #     ]
 # }
 
-# DELETE http://localhost:4004/odata/v4/my/Orders(10000)
+
+
+POST http://localhost:4004/odata/v4/my/placeOrder
+Content-Type: application/json
+
+{
+    "Customers": {
+        "Name": "Harsh Agrawal",
+        "Phone": "9174901008"
+    },
+    "OrderDate": "2025-04-07T12:00:00Z",
+    "Items": [
+        { "ProductID": 1, "Quantity": 2, "Price": 64.29},
+        { "ProductID": 2, "Quantity": 1, "Price": 303.32}
+    ]
+}
+
+
+
+# DELETE http://localhost:4004/odata/v4/my/Orders(203)
 
 
 
